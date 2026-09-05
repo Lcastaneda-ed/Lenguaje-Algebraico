@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Capítulo 3 - El Traductor Algebraico</title>
+
+    <link rel="stylesheet"
+        href="../css/estilos.css">
+
+    <style>
+
+        .mision {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 35px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 25px;
+            text-align: center;
+        }
+
+        .traductor {
+            margin: 30px auto;
+            padding: 30px;
+            max-width: 700px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 20px;
+        }
+
+        .frase {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 25px 0;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .opciones {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .opcion {
+            padding: 18px;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .opcion:hover {
+            transform: scale(1.03);
+        }
+
+        .correcta {
+            background: #2ecc71 !important;
+            color: white;
+        }
+
+        .incorrecta {
+            background: #e74c3c !important;
+            color: white;
+        }
+
+        .retroalimentacion {
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 15px;
+            display: none;
+            font-weight: bold;
+        }
+
+        .puntuacion {
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        .boton-siguiente {
+            margin-top: 25px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 15px;
+            background: #f6c945;
+            color: #222;
+            font-weight: bold;
+            cursor: pointer;
+            display: none;
+        }
+
+        .boton-siguiente:hover {
+            transform: scale(1.05);
+        }
+
+        .mensaje-final {
+            display: none;
+            margin-top: 30px;
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(46,204,113,0.2);
+        }
+
+        .explicacion {
+            margin-top: 15px;
+            font-weight: normal;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <h1>🧙‍♂️ Capítulo 3</h1>
+
+    <p>
+        El Traductor Algebraico
+    </p>
+
+</header>
+
+
+<main class="mision">
+
+    <h2>📜 Misión: El Traductor Algebraico</h2>
+
+    <p>
+        Has llegado al territorio donde las palabras
+        deben convertirse en expresiones algebraicas.
+    </p>
+
+    <p>
+        Lee cuidadosamente cada frase y selecciona
+        la expresión algebraica correcta.
+    </p>
+
+
+    <div class="traductor">
+
+        <div class="puntuacion">
+            ⭐ Puntos:
+            <span id="puntosJuego">0</span>
+        </div>
+
+
+        <div class="frase" id="frase">
+            Cargando misión...
+        </div>
+
+
+        <div class="opciones" id="opciones">
+        </div>
+
+
+        <div
+            class="retroalimentacion"
+            id="retroalimentacion">
+        </div>
+
+
+        <button
+            class="boton-siguiente"
+            id="siguiente"
+            onclick="siguientePregunta()">
+
+            ➡️ Siguiente desafío
+
+        </button>
+
+
+        <div
+            class="mensaje-final"
+            id="mensajeFinal">
+
+            <h2>🏆 ¡MISIÓN COMPLETADA!</h2>
+
+            <p>
+                ¡Excelente trabajo, explorador!
+            </p>
+
+            <p>
+                Has demostrado que puedes traducir
+                correctamente el lenguaje verbal
+                al lenguaje algebraico.
+            </p>
+
+            <p>
+                🔓 ¡El Capítulo 4 ha sido desbloqueado!
+            </p>
+
+            <button
+                class="boton-siguiente"
+                style="display:inline-block"
+                onclick="volverMapa()">
+
+                🗺️ Volver al mapa
+
+            </button>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script src="../js/progreso.js"></script>
+
+
+<script>
+
+const preguntas = [
+
+    {
+        frase: "El triple de un número",
+        opciones: [
+            "3x",
+            "x + 3",
+            "x³"
+        ],
+        correcta: 0,
+        explicacion:
+            "El triple significa multiplicar por 3: 3x."
+    },
+
+    {
+        frase: "La mitad de un número",
+        opciones: [
+            "2x",
+            "x / 2",
+            "x - 2"
+        ],
+        correcta: 1,
+        explicacion:
+            "La mitad significa dividir entre 2: x/2."
+    },
+
+    {
+        frase: "El cuadrado de un número",
+        opciones: [
+            "2x",
+            "x + 2",
+            "x²"
+        ],
+        correcta: 2,
+        explicacion:
+            "El cuadrado de un número se representa como x²."
+    },
+
+    {
+        frase: "El triple de un número aumentado en 5",
+        opciones: [
+            "3x + 5",
+            "3(x + 5)",
+            "x + 15"
+        ],
+        correcta: 0,
+        explicacion:
+            "Primero tenemos el triple del número: 3x. Luego aumentamos 5: 3x + 5."
+    },
+
+    {
+        frase: "El triple de la suma de un número y 5",
+        opciones: [
+            "3x + 5",
+            "3(x + 5)",
+            "x + 3 + 5"
+        ],
+        correcta: 1,
+        explicacion:
+            "La expresión indica que todo el contenido x + 5 se multiplica por 3: 3(x + 5)."
+    }
+
+];
+
+
+let preguntaActual = 0;
+
+let puntosJuego = 0;
+
+let respondida = false;
+
+
+const frase =
+    document.getElementById("frase");
+
+const opciones =
+    document.getElementById("opciones");
+
+const retroalimentacion =
+    document.getElementById("retroalimentacion");
+
+const siguiente =
+    document.getElementById("siguiente");
+
+const puntos =
+    document.getElementById("puntosJuego");
+
+const mensajeFinal =
+    document.getElementById("mensajeFinal");
+
+
+function cargarPregunta() {
+
+    respondida = false;
+
+    retroalimentacion.style.display =
+        "none";
+
+    siguiente.style.display =
+        "none";
+
+    opciones.innerHTML = "";
+
+
+    const pregunta =
+        preguntas[preguntaActual];
+
+
+    frase.textContent =
+        "🗣️ " + pregunta.frase;
+
+
+    pregunta.opciones.forEach(
+        (opcion, indice) => {
+
+            const boton =
+                document.createElement("button");
+
+            boton.className =
+                "opcion";
+
+            boton.textContent =
+                opcion;
+
+            boton.onclick = function() {
+
+                comprobarRespuesta(
+                    indice
+                );
+
+            };
+
+            opciones.appendChild(
+                boton
+            );
+
+        }
+    );
+
+}
+
+
+function comprobarRespuesta(indice) {
+
+    if (respondida) return;
+
+    respondida = true;
+
+
+    const pregunta =
+        preguntas[preguntaActual];
+
+
+    const botones =
+        document.querySelectorAll(
+            ".opcion"
+        );
+
+
+    botones.forEach(
+        boton => {
+            boton.disabled = true;
+        }
+    );
+
+
+    retroalimentacion.style.display =
+        "block";
+
+
+    if (indice === pregunta.correcta) {
+
+        botones[indice]
+            .classList.add("correcta");
+
+
+        puntosJuego += 20;
+
+
+        puntos.textContent =
+            puntosJuego;
+
+
+        retroalimentacion.innerHTML =
+            "✅ ¡Correcto!<div class='explicacion'>" +
+            pregunta.explicacion +
+            "</div>";
+
+
+        retroalimentacion.style.background =
+            "rgba(46,204,113,0.2)";
+
+
+    } else {
+
+        botones[indice]
+            .classList.add("incorrecta");
+
+
+        botones[pregunta.correcta]
+            .classList.add("correcta");
+
+
+        retroalimentacion.innerHTML =
+            "❌ No es correcto.<div class='explicacion'>" +
+            pregunta.explicacion +
+            "</div>";
+
+
+        retroalimentacion.style.background =
+            "rgba(231,76,60,0.2)";
+
+    }
+
+
+    if (
+        preguntaActual <
+        preguntas.length - 1
+    ) {
+
+        siguiente.style.display =
+            "inline-block";
+
+    } else {
+
+        finalizarCapitulo();
+
+    }
+
+}
+
+
+function siguientePregunta() {
+
+    preguntaActual++;
+
+    cargarPregunta();
+
+}
+
+
+function finalizarCapitulo() {
+
+    if (puntosJuego >= 80) {
+
+        sumarPuntos(puntosJuego);
+
+        completarCapitulo(3);
+
+
+        setTimeout(
+            () => {
+
+                mensajeFinal.style.display =
+                    "block";
+
+            },
+            500
+        );
+
+    } else {
+
+        setTimeout(
+            () => {
+
+                alert(
+                    "⚠️ Necesitas obtener al menos 80 puntos para superar este capítulo.\n\n" +
+                    "Puedes volver a intentarlo."
+                );
+
+                location.reload();
+
+            },
+            500
+        );
+
+    }
+
+}
+
+
+function volverMapa() {
+
+    window.location.href =
+        "../index.html";
+
+}
+
+
+cargarPregunta();
+
+</script>
+
+</body>
+
+</html>

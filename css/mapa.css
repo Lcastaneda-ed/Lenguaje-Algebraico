@@ -1,0 +1,187 @@
+/* =====================================
+   MAPA DE LA GRAN AVENTURA
+===================================== */
+
+.mapa-aventura {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 30px;
+    position: relative;
+}
+
+
+
+/* CAMINO */
+
+.camino {
+    display: none;
+}
+
+/* CONTENEDOR */
+
+.capitulos-mapa {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 20px;
+
+    position: relative;
+
+    z-index: 1;
+}
+
+
+/* TARJETA */
+
+.capitulo {
+
+    min-height: 190px;
+
+    padding: 20px;
+
+    border-radius: 25px;
+
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+    border: 3px solid
+        rgba(255,255,255,0.15);
+
+}
+
+
+/* ICONO */
+
+.icono-capitulo {
+
+    font-size: 3.5rem;
+
+    margin-bottom: 10px;
+
+}
+
+
+/* DISPONIBLE */
+
+.capitulo.disponible {
+
+    cursor: pointer;
+
+    background:
+        rgba(46,204,113,0.18);
+
+    border-color:
+        #2ecc71;
+
+    box-shadow:
+        0 0 20px
+        rgba(46,204,113,0.25);
+
+}
+
+
+/* EFECTO DISPONIBLE */
+
+.capitulo.disponible:hover {
+
+    transform:
+        translateY(-12px)
+        scale(1.04);
+
+    box-shadow:
+        0 15px 30px
+        rgba(0,0,0,0.35);
+
+}
+
+
+/* BLOQUEADO */
+
+.capitulo.bloqueado {
+
+    opacity: 0.45;
+
+    filter:
+        grayscale(0.7);
+
+    cursor:
+        not-allowed;
+
+}
+
+
+/* COMPLETADO */
+
+.capitulo.completado {
+
+    background:
+        rgba(246,201,69,0.2);
+
+    border-color:
+        #f6c945;
+
+}
+
+
+/* ESTADO */
+
+.estado {
+
+    margin-top: 12px;
+
+    padding:
+        7px 14px;
+
+    border-radius: 20px;
+
+    font-size: 0.85rem;
+
+    font-weight: bold;
+
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+
+    .capitulos-mapa {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+    .camino {
+
+        display: none;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .capitulos-mapa {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}

@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Capítulo 5 - Términos Semejantes
+    </title>
+
+    <link rel="stylesheet"
+        href="../css/estilos.css">
+
+
+    <style>
+
+        .mision {
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 35px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 25px;
+            text-align: center;
+        }
+
+
+        .zona-juego {
+
+            max-width: 800px;
+
+            margin: 30px auto;
+
+            padding: 30px;
+
+            background: rgba(0,0,0,0.25);
+
+            border-radius: 25px;
+
+        }
+
+
+        .puntuacion {
+
+            font-size: 1.2rem;
+
+            font-weight: bold;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .desafio {
+
+            padding: 25px;
+
+            margin-bottom: 25px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border-radius: 20px;
+
+        }
+
+
+        .terminos {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+            margin: 25px 0;
+
+        }
+
+
+        .termino {
+
+            padding: 15px 22px;
+
+            border-radius: 15px;
+
+            background: rgba(255,255,255,0.12);
+
+            border: 2px solid #f6c945;
+
+            font-size: 1.4rem;
+
+            font-weight: bold;
+
+        }
+
+
+        .opciones {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(200px, 1fr));
+
+            gap: 15px;
+
+        }
+
+
+        .opcion {
+
+            padding: 17px;
+
+            border: none;
+
+            border-radius: 15px;
+
+            font-size: 1.05rem;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+        }
+
+
+        .opcion:hover {
+
+            transform:
+                scale(1.04);
+
+        }
+
+
+        .opcion:disabled {
+
+            cursor: default;
+
+        }
+
+
+        .correcta {
+
+            background:
+                #2ecc71 !important;
+
+            color: white;
+
+        }
+
+
+        .incorrecta {
+
+            background:
+                #e74c3c !important;
+
+            color: white;
+
+        }
+
+
+        .retroalimentacion {
+
+            display: none;
+
+            margin-top: 20px;
+
+            padding: 18px;
+
+            border-radius: 15px;
+
+            font-weight: bold;
+
+        }
+
+
+        .siguiente {
+
+            display: none;
+
+            margin-top: 25px;
+
+            padding: 15px 30px;
+
+            border: none;
+
+            border-radius: 15px;
+
+            background: #f6c945;
+
+            color: #222;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .siguiente:hover {
+
+            transform:
+                scale(1.05);
+
+        }
+
+
+        .final {
+
+            display: none;
+
+            margin-top: 30px;
+
+            padding: 35px;
+
+            border-radius: 25px;
+
+            background:
+                rgba(46,204,113,0.2);
+
+        }
+
+
+        .cofre {
+
+            font-size: 5rem;
+
+            margin: 20px;
+
+            animation:
+                aparecer 1s ease;
+
+        }
+
+
+        .resultado-final {
+
+            font-size: 1.8rem;
+
+            font-weight: bold;
+
+            margin: 20px;
+
+        }
+
+
+        @keyframes aparecer {
+
+            from {
+
+                transform:
+                    scale(0);
+
+                opacity: 0;
+
+            }
+
+            to {
+
+                transform:
+                    scale(1);
+
+                opacity: 1;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>
+        💎 Capítulo 5
+    </h1>
+
+    <p>
+        Términos semejantes
+    </p>
+
+</header>
+
+
+<main class="mision">
+
+
+    <h2>
+        🏆 Misión Final: El Tesoro Algebraico
+    </h2>
+
+
+    <p>
+
+        ¡Has llegado al último territorio,
+        explorador!
+
+    </p>
+
+
+    <p>
+
+        Para abrir el cofre del tesoro
+        tendrás que dominar los
+        <strong>términos semejantes</strong>.
+
+    </p>
+
+
+    <div class="zona-juego">
+
+
+        <div class="puntuacion">
+
+            ⭐ Puntos:
+            <span id="puntosJuego">
+                0
+            </span>
+
+        </div>
+
+
+        <div class="desafio">
+
+
+            <h3>
+                🧩 Desafío 1
+            </h3>
+
+
+            <p>
+                Observa los siguientes términos:
+            </p>
+
+
+            <div class="terminos">
+
+                <div class="termino">
+                    3x²
+                </div>
+
+                <div class="termino">
+                    5x²
+                </div>
+
+                <div class="termino">
+                    4x³
+                </div>
+
+                <div class="termino">
+                    7x
+                </div>
+
+            </div>
+
+
+            <p>
+                ¿Cuál de ellos es semejante a
+                <strong>3x²</strong>?
+            </p>
+
+
+            <div
+                class="opciones"
+                id="opciones1">
+            </div>
+
+
+            <div
+                class="retroalimentacion"
+                id="retro1">
+            </div>
+
+
+        </div>
+
+
+        <div class="desafio">
+
+
+            <h3>
+                🧩 Desafío 2
+            </h3>
+
+
+            <p>
+                ¿Por qué <strong>3x²</strong> y
+                <strong>5x²</strong> son términos semejantes?
+            </p>
+
+
+            <div
+                class="opciones"
+                id="opciones2">
+            </div>
+
+
+            <div
+                class="retroalimentacion"
+                id="retro2">
+            </div>
+
+
+        </div>
+
+
+        <div class="desafio">
+
+
+            <h3>
+                🧩 Desafío 3
+            </h3>
+
+
+            <p>
+                Reduce la expresión:
+            </p>
+
+
+            <div class="terminos">
+
+                <div class="termino">
+                    3x² + 5x² - 2x²
+                </div>
+
+            </div>
+
+
+            <div
+                class="opciones"
+                id="opciones3">
+            </div>
+
+
+            <div
+                class="retroalimentacion"
+                id="retro3">
+            </div>
+
+
+        </div>
+
+
+        <div class="desafio">
+
+
+            <h3>
+                🧩 Desafío 4
+            </h3>
+
+
+            <p>
+                Reduce:
+            </p>
+
+
+            <div class="terminos">
+
+                <div class="termino">
+                    12x + 5x - 8x
+                </div>
+
+            </div>
+
+
+            <div
+                class="opciones"
+                id="opciones4">
+            </div>
+
+
+            <div
+                class="retroalimentacion"
+                id="retro4">
+            </div>
+
+
+        </div>
+
+
+        <div class="desafio">
+
+
+            <h3>
+                👑 Desafío Final
+            </h3>
+
+
+            <p>
+
+                Sofía y Andrés encontraron
+                una expresión en el mapa:
+
+            </p>
+
+
+            <div class="terminos">
+
+                <div class="termino">
+                    x + 3x = 96
+                </div>
+
+            </div>
+
+
+            <p>
+
+                ¿Cuál es el valor de
+                <strong>x</strong>?
+
+            </p>
+
+
+            <div
+                class="opciones"
+                id="opciones5">
+            </div>
+
+
+            <div
+                class="retroalimentacion"
+                id="retro5">
+            </div>
+
+
+        </div>
+
+
+        <div
+            class="final"
+            id="final">
+
+
+            <div class="cofre">
+                💎
+            </div>
+
+
+            <h2>
+                🎉 ¡HAS ENCONTRADO EL TESORO!
+            </h2>
+
+
+            <p>
+
+                ¡Felicidades, explorador!
+
+            </p>
+
+
+            <p>
+
+                Has completado los
+                <strong>5 capítulos</strong>
+                de La Gran Aventura del Álgebra.
+
+            </p>
+
+
+            <div class="resultado-final">
+
+                🏆 MAESTRO DEL ÁLGEBRA 🏆
+
+            </div>
+
+
+            <p>
+
+                Has demostrado que puedes
+                comprender, traducir, resolver
+                y simplificar expresiones
+                algebraicas.
+
+            </p>
+
+
+            <p>
+
+                ⭐ Tu aventura ha terminado,
+                pero tu aprendizaje continúa.
+
+            </p>
+
+
+            <button
+                class="siguiente"
+                style="display:inline-block"
+                onclick="volverMapa()">
+
+                🗺️ Ver mapa completo
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+</main>
+
+
+<script src="../js/progreso.js"></script>
+
+
+<script>
+
+
+let puntosJuego = 0;
+
+
+/*
+--------------------------------
+DESAFÍO 1
+--------------------------------
+*/
+
+
+const preguntas1 = [
+
+    "5x²",
+
+    "4x³",
+
+    "7x"
+
+];
+
+
+crearOpciones(
+
+    "opciones1",
+
+    preguntas1,
+
+    0,
+
+    "retro1",
+
+    "3x² y 5x² son semejantes porque tienen la misma parte literal x²."
+
+);
+
+
+/*
+--------------------------------
+DESAFÍO 2
+--------------------------------
+*/
+
+
+const preguntas2 = [
+
+    "Porque tienen diferente exponente",
+
+    "Porque tienen la misma parte literal y el mismo exponente",
+
+    "Porque sus coeficientes son iguales"
+
+];
+
+
+crearOpciones(
+
+    "opciones2",
+
+    preguntas2,
+
+    1,
+
+    "retro2",
+
+    "Los términos semejantes tienen la misma parte literal con los mismos exponentes."
+
+);
+
+
+/*
+--------------------------------
+DESAFÍO 3
+--------------------------------
+*/
+
+
+const preguntas3 = [
+
+    "6x²",
+
+    "8x²",
+
+    "6x³"
+
+];
+
+
+crearOpciones(
+
+    "opciones3",
+
+    preguntas3,
+
+    0,
+
+    "retro3",
+
+    "3 + 5 - 2 = 6, por eso el resultado es 6x²."
+
+);
+
+
+/*
+--------------------------------
+DESAFÍO 4
+--------------------------------
+*/
+
+
+const preguntas4 = [
+
+    "9x",
+
+    "17x",
+
+    "9x²"
+
+];
+
+
+crearOpciones(
+
+    "opciones4",
+
+    preguntas4,
+
+    0,
+
+    "retro4",
+
+    "12 + 5 - 8 = 9, por eso el resultado es 9x."
+
+);
+
+
+/*
+--------------------------------
+DESAFÍO FINAL
+--------------------------------
+*/
+
+
+const preguntas5 = [
+
+    "x = 12",
+
+    "x = 24",
+
+    "x = 48"
+
+];
+
+
+crearOpciones(
+
+    "opciones5",
+
+    preguntas5,
+
+    1,
+
+    "retro5",
+
+    "x + 3x = 4x. Entonces 4x = 96 y x = 24."
+
+);
+
+
+/*
+--------------------------------
+FUNCIÓN GENERAL
+--------------------------------
+*/
+
+
+let desafiosCompletados = 0;
+
+
+function crearOpciones(
+
+    idContenedor,
+
+    preguntas,
+
+    correcta,
+
+    idRetro,
+
+    explicacion
+
+) {
+
+
+    const contenedor =
+        document.getElementById(
+            idContenedor
+        );
+
+
+    const retro =
+        document.getElementById(
+            idRetro
+        );
+
+
+    preguntas.forEach(
+
+        (texto, indice) => {
+
+
+            const boton =
+                document.createElement(
+                    "button"
+                );
+
+
+            boton.className =
+                "opcion";
+
+
+            boton.textContent =
+                texto;
+
+
+            boton.onclick =
+                function() {
+
+
+                    const botones =
+                        contenedor
+                        .querySelectorAll(
+                            ".opcion"
+                        );
+
+
+                    botones.forEach(
+                        b => {
+                            b.disabled = true;
+                        }
+                    );
+
+
+                    retro.style.display =
+                        "block";
+
+
+                    if (
+                        indice === correcta
+                    ) {
+
+
+                        boton.classList.add(
+                            "correcta"
+                        );
+
+
+                        puntosJuego += 20;
+
+
+                        document
+                            .getElementById(
+                                "puntosJuego"
+                            )
+                            .textContent =
+                            puntosJuego;
+
+
+                        retro.innerHTML =
+                            "✅ ¡Correcto!<br><br>" +
+                            explicacion;
+
+
+                        retro.style.background =
+                            "rgba(46,204,113,0.2)";
+
+
+                        desafiosCompletados++;
+
+
+                        verificarFinal();
+
+
+                    } else {
+
+
+                        boton.classList.add(
+                            "incorrecta"
+                        );
+
+
+                        botones[correcta]
+                            .classList.add(
+                                "correcta"
+                            );
+
+
+                        retro.innerHTML =
+                            "❌ Respuesta incorrecta.<br><br>" +
+                            explicacion;
+
+
+                        retro.style.background =
+                            "rgba(231,76,60,0.2)";
+
+                    }
+
+                };
+
+
+            contenedor.appendChild(
+                boton
+            );
+
+        }
+
+    );
+
+}
+
+
+/*
+--------------------------------
+FINAL
+--------------------------------
+*/
+
+
+function verificarFinal() {
+
+
+    if (
+        desafiosCompletados === 5
+    ) {
+
+
+        if (
+            puntosJuego >= 80
+        ) {
+
+
+            sumarPuntos(
+                puntosJuego
+            );
+
+
+            completarCapitulo(
+                5
+            );
+
+
+            setTimeout(
+
+                () => {
+
+                    document
+                        .getElementById(
+                            "final"
+                        )
+                        .style.display =
+                        "block";
+
+
+                    window.scrollTo({
+
+                        top:
+                            document.body
+                                .scrollHeight,
+
+                        behavior:
+                            "smooth"
+
+                    });
+
+                },
+
+                700
+
+            );
+
+        }
+
+    }
+
+}
+
+
+/*
+--------------------------------
+VOLVER AL MAPA
+--------------------------------
+*/
+
+
+function volverMapa() {
+
+    window.location.href =
+        "../index.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

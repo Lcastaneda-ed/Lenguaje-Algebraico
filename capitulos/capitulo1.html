@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Capítulo 1 - El Lenguaje Algebraico</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/estilos.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>🏝️ Capítulo 1</h1>
+
+    <p>
+        El Lenguaje Algebraico
+    </p>
+
+    <div class="grupo">
+        Grupo N.º 02
+    </div>
+
+</header>
+
+
+<section class="bienvenida">
+
+    <h2>
+        📜 Tu primera misión
+    </h2>
+
+    <p>
+        En este capítulo aprenderás a reconocer
+        el lenguaje algebraico.
+    </p>
+
+    <p>
+        Recuerda: podemos utilizar números,
+        letras y símbolos para representar
+        cantidades.
+    </p>
+
+</section>
+
+
+<section class="bienvenida">
+
+    <h2>
+        🎮 Desafío algebraico
+    </h2>
+
+    <p>
+        Observa la expresión:
+    </p>
+
+    <h2 style="margin: 20px;">
+        2x + 7
+    </h2>
+
+    <p>
+        ¿Cuál de las siguientes opciones
+        representa correctamente esta expresión?
+    </p>
+
+
+    <div style="margin-top: 25px;">
+
+        <button
+            class="btn"
+            onclick="responder(1)"
+        >
+            A. Dos veces un número más siete
+        </button>
+
+        <br>
+
+        <button
+            class="btn"
+            onclick="responder(2)"
+        >
+            B. Dos más siete números
+        </button>
+
+        <br>
+
+        <button
+            class="btn"
+            onclick="responder(3)"
+        >
+            C. Dos números multiplicados por siete
+        </button>
+
+    </div>
+
+
+    <div
+        id="resultado"
+        style="
+            margin-top:25px;
+            font-size:20px;
+            font-weight:bold;
+        "
+    ></div>
+
+</section>
+
+
+<footer>
+
+    <p>
+        E-Learning en la Enseñanza Digital
+    </p>
+
+    <p>
+        Grupo N.º 02
+    </p>
+
+</footer>
+
+
+<script src="../js/progreso.js"></script>
+
+
+<script>
+
+function responder(opcion) {
+
+    const resultado =
+        document.getElementById("resultado");
+
+
+    if (opcion === 1) {
+
+        resultado.innerHTML =
+            "🎉 ¡Excelente! Respuesta correcta.<br>" +
+            "Has ganado 100 puntos. ⭐";
+
+        sumarPuntos(100);
+
+        completarCapitulo(1);
+
+        setTimeout(function() {
+
+            alert(
+                "🏆 ¡CAPÍTULO 1 SUPERADO!\n\n" +
+                "Has desbloqueado el Capítulo 2."
+            );
+
+            window.location.href =
+                "../index.html";
+
+        }, 1500);
+
+
+    } else {
+
+        resultado.innerHTML =
+            "❌ Respuesta incorrecta.<br>" +
+            "💡 Recuerda que 2x significa " +
+            "dos veces un número.";
+
+    }
+
+}
+
+</script>
+
+
+</body>
+
+</html>

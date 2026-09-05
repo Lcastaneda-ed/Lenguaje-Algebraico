@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Capítulo 2 - Detective Algebraico</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/estilos.css"
+    >
+
+    <style>
+
+        /* =================================
+           DETECTIVE ALGEBRAICO
+        ================================= */
+
+        .detective {
+
+            max-width: 900px;
+
+            margin: 30px auto;
+
+            padding: 35px;
+
+            text-align: center;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border-radius: 25px;
+
+            border:
+                1px solid rgba(255,255,255,0.15);
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,0.3);
+
+        }
+
+
+        .personaje {
+
+            font-size: 70px;
+
+            animation:
+                detectiveFlota 2s
+                ease-in-out infinite;
+
+        }
+
+
+        @keyframes detectiveFlota {
+
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+
+        }
+
+
+        .termino {
+
+            margin: 25px 0;
+
+            padding: 20px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(0,0,0,0.25);
+
+            font-size: 42px;
+
+            font-weight: bold;
+
+            letter-spacing: 5px;
+
+        }
+
+
+        .pregunta {
+
+            margin-top: 25px;
+
+            font-size: 22px;
+
+        }
+
+
+        .opciones {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+
+            margin-top: 25px;
+
+        }
+
+
+        .opcion {
+
+            padding: 16px;
+
+            border: none;
+
+            border-radius: 15px;
+
+            background: #1c4966;
+
+            color: white;
+
+            font-size: 16px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+        }
+
+
+        .opcion:hover {
+
+            transform:
+                translateY(-4px);
+
+            background: #276589;
+
+        }
+
+
+        .correcta {
+
+            background: #27ae60 !important;
+
+        }
+
+
+        .incorrecta {
+
+            background: #c0392b !important;
+
+        }
+
+
+        .resultado {
+
+            min-height: 60px;
+
+            margin-top: 25px;
+
+            font-size: 19px;
+
+            font-weight: bold;
+
+        }
+
+
+        .progreso-juego {
+
+            margin-top: 25px;
+
+            font-weight: bold;
+
+        }
+
+
+        .barra-juego {
+
+            height: 15px;
+
+            margin-top: 10px;
+
+            background:
+                rgba(0,0,0,0.3);
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+        }
+
+
+        .barra-juego-interior {
+
+            width: 25%;
+
+            height: 100%;
+
+            background: #f6c945;
+
+            transition:
+                width 0.5s ease;
+
+        }
+
+
+        .puntos-juego {
+
+            margin-top: 15px;
+
+            font-size: 18px;
+
+        }
+
+
+        .volver {
+
+            margin-top: 20px;
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .opciones {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .termino {
+
+                font-size: 30px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>🕵️ Detective Algebraico</h1>
+
+    <p>
+        Capítulo 2 — Anatomía del término
+    </p>
+
+    <div class="grupo">
+        Grupo N.º 02
+    </div>
+
+</header>
+
+
+<section class="detective">
+
+    <div class="personaje">
+        🕵️
+    </div>
+
+
+    <h2>
+        🔎 ¡Misión de detective!
+    </h2>
+
+
+    <p style="margin-top:15px;">
+
+        Analiza cuidadosamente el siguiente
+        término algebraico.
+
+    </p>
+
+
+    <div class="termino">
+
+        −8x³y²
+
+    </div>
+
+
+    <p>
+
+        Descubre sus diferentes partes
+        para completar la misión.
+
+    </p>
+
+
+    <!-- PROGRESO -->
+
+    <div class="progreso-juego">
+
+        Misión:
+
+        <span id="numeroPregunta">
+            1
+        </span>
+        / 4
+
+        <div class="barra-juego">
+
+            <div
+                id="barraJuego"
+                class="barra-juego-interior"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PUNTOS -->
+
+    <div class="puntos-juego">
+
+        ⭐ Puntos:
+
+        <span id="puntosJuego">
+            0
+        </span>
+
+    </div>
+
+
+    <!-- PREGUNTA -->
+
+    <div class="pregunta">
+
+        ¿Cuál es el signo del término?
+
+    </div>
+
+
+    <!-- OPCIONES -->
+
+    <div
+        id="opciones"
+        class="opciones"
+    >
+
+        <button
+            class="opcion"
+            onclick="responder(1)"
+        >
+            A. Positivo
+        </button>
+
+
+        <button
+            class="opcion"
+            onclick="responder(2)"
+        >
+            B. Negativo
+        </button>
+
+
+        <button
+            class="opcion"
+            onclick="responder(3)"
+        >
+            C. Neutro
+        </button>
+
+
+        <button
+            class="opcion"
+            onclick="responder(4)"
+        >
+            D. No tiene signo
+        </button>
+
+    </div>
+
+
+    <!-- RESULTADO -->
+
+    <div
+        id="resultado"
+        class="resultado"
+    ></div>
+
+
+    <!-- VOLVER -->
+
+    <button
+        class="btn volver"
+        onclick="volverMapa()"
+    >
+        🗺️ Volver al mapa
+    </button>
+
+</section>
+
+
+<footer>
+
+    <p>
+        E-Learning en la Enseñanza Digital
+    </p>
+
+    <p>
+        Grupo N.º 02
+    </p>
+
+</footer>
+
+
+<script src="../js/progreso.js"></script>
+
+
+<script>
+
+    /* =================================
+       PREGUNTAS
+    ================================= */
+
+    const preguntas = [
+
+        {
+            pregunta:
+                "¿Cuál es el signo del término?",
+
+            opciones: [
+                "A. Positivo",
+                "B. Negativo",
+                "C. Neutro",
+                "D. No tiene signo"
+            ],
+
+            correcta: 2,
+
+            explicacion:
+                "El signo es negativo porque el término comienza con −."
+        },
+
+
+        {
+            pregunta:
+                "¿Cuál es el coeficiente?",
+
+            opciones: [
+                "A. −8",
+                "B. 8",
+                "C. x",
+                "D. 3"
+            ],
+
+            correcta: 1,
+
+            explicacion:
+                "El coeficiente es −8, porque acompaña a la parte literal."
+        },
+
+
+        {
+            pregunta:
+                "¿Cuál es la parte literal?",
+
+            opciones: [
+                "A. −8",
+                "B. 3",
+                "C. x³y²",
+                "D. −8x"
+            ],
+
+            correcta: 3,
+
+            explicacion:
+                "La parte literal está formada por las letras y sus exponentes: x³y²."
+        },
+
+
+        {
+            pregunta:
+                "¿Cuáles son los exponentes?",
+
+            opciones: [
+                "A. −8 y 3",
+                "B. 3 y 2",
+                "C. 8 y 2",
+                "D. x e y"
+            ],
+
+            correcta: 2,
+
+            explicacion:
+                "Los exponentes son 3 para x y 2 para y."
+        }
+
+    ];
+
+
+    let preguntaActual = 0;
+
+    let puntos = 0;
+
+    let respondida = false;
+
+
+    /* =================================
+       MOSTRAR PREGUNTA
+    ================================= */
+
+    function mostrarPregunta() {
+
+        respondida = false;
+
+        const pregunta =
+            preguntas[preguntaActual];
+
+
+        document.querySelector(
+            ".pregunta"
+        ).textContent =
+            pregunta.pregunta;
+
+
+        const contenedor =
+            document.getElementById(
+                "opciones"
+            );
+
+
+        contenedor.innerHTML = "";
+
+
+        pregunta.opciones.forEach(
+            function(opcion, indice) {
+
+                const boton =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                boton.className =
+                    "opcion";
+
+
+                boton.textContent =
+                    opcion;
+
+
+                boton.onclick =
+                    function() {
+
+                        responder(
+                            indice + 1
+                        );
+
+                    };
+
+
+                contenedor.appendChild(
+                    boton
+                );
+
+            }
+        );
+
+
+        document.getElementById(
+            "numeroPregunta"
+        ).textContent =
+            preguntaActual + 1;
+
+
+        document.getElementById(
+            "barraJuego"
+        ).style.width =
+            (
+                (preguntaActual + 1) / 4
+            ) * 100 + "%";
+
+
+        document.getElementById(
+            "resultado"
+        ).textContent = "";
+
+    }
+
+
+    /* =================================
+       RESPONDER
+    ================================= */
+
+    function responder(opcion) {
+
+        if (respondida) return;
+
+        respondida = true;
+
+
+        const pregunta =
+            preguntas[preguntaActual];
+
+
+        const botones =
+            document.querySelectorAll(
+                ".opcion"
+            );
+
+
+        if (
+            opcion ===
+            pregunta.correcta
+        ) {
+
+            puntos += 25;
+
+
+            botones[
+                opcion - 1
+            ].classList.add(
+                "correcta"
+            );
+
+
+            document.getElementById(
+                "resultado"
+            ).innerHTML =
+                "🎉 ¡Correcto!<br>" +
+                pregunta.explicacion;
+
+
+        } else {
+
+            botones[
+                opcion - 1
+            ].classList.add(
+                "incorrecta"
+            );
+
+
+            document.getElementById(
+                "resultado"
+            ).innerHTML =
+                "❌ No es correcto.<br>" +
+                "💡 " +
+                pregunta.explicacion;
+
+        }
+
+
+        document.getElementById(
+            "puntosJuego"
+        ).textContent =
+            puntos;
+
+
+        setTimeout(
+            siguientePregunta,
+            1600
+        );
+
+    }
+
+
+    /* =================================
+       SIGUIENTE PREGUNTA
+    ================================= */
+
+    function siguientePregunta() {
+
+        preguntaActual++;
+
+
+        if (
+            preguntaActual <
+            preguntas.length
+        ) {
+
+            mostrarPregunta();
+
+        } else {
+
+            finalizarCapitulo();
+
+        }
+
+    }
+
+
+    /* =================================
+       FINALIZAR
+    ================================= */
+
+    function finalizarCapitulo() {
+
+        const resultado =
+            document.getElementById(
+                "resultado"
+            );
+
+
+        if (puntos >= 80) {
+
+            sumarPuntos(puntos);
+
+            completarCapitulo(2);
+
+
+            resultado.innerHTML =
+
+                "🏆 ¡MISIÓN COMPLETADA!<br><br>" +
+
+                "Has obtenido " +
+                puntos +
+                " puntos. ⭐<br><br>" +
+
+                "🔓 ¡El Capítulo 3 ha sido desbloqueado!";
+
+
+            document.getElementById(
+                "opciones"
+            ).innerHTML = "";
+
+
+            setTimeout(
+                function() {
+
+                    window.location.href =
+                        "../index.html";
+
+                },
+                3000
+            );
+
+
+        } else {
+
+            resultado.innerHTML =
+
+                "😔 Necesitas al menos " +
+                "80 puntos para superar " +
+                "este capítulo.<br><br>" +
+
+                "Tu puntuación: " +
+                puntos +
+                " puntos.<br><br>" +
+
+                "🔄 Puedes intentarlo nuevamente.";
+
+
+            document.getElementById(
+                "opciones"
+            ).innerHTML =
+
+                '<button class="btn" ' +
+                'onclick="reiniciarJuego()">' +
+                '🔄 Intentar nuevamente' +
+                '</button>';
+
+        }
+
+    }
+
+
+    /* =================================
+       REINICIAR JUEGO
+    ================================= */
+
+    function reiniciarJuego() {
+
+        preguntaActual = 0;
+
+        puntos = 0;
+
+        document.getElementById(
+            "puntosJuego"
+        ).textContent = "0";
+
+
+        mostrarPregunta();
+
+    }
+
+
+    /* =================================
+       VOLVER AL MAPA
+    ================================= */
+
+    function volverMapa() {
+
+        window.location.href =
+            "../index.html";
+
+    }
+
+
+    /* =================================
+       INICIAR
+    ================================= */
+
+    mostrarPregunta();
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Capítulo 4 - La Balanza Algebraica</title>
+
+    <link rel="stylesheet"
+        href="../css/estilos.css">
+
+    <style>
+
+        .mision {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 35px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 25px;
+            text-align: center;
+        }
+
+        .balanza {
+            max-width: 750px;
+            margin: 30px auto;
+            padding: 30px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 25px;
+        }
+
+        .ecuacion {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .lado {
+            min-width: 220px;
+            padding: 25px;
+            border: 3px solid #f6c945;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.08);
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .igual {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .pregunta {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 18px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .opciones {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .opcion {
+            padding: 17px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.05rem;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .opcion:hover {
+            transform: scale(1.03);
+        }
+
+        .opcion:disabled {
+            cursor: default;
+        }
+
+        .correcta {
+            background: #2ecc71 !important;
+            color: white;
+        }
+
+        .incorrecta {
+            background: #e74c3c !important;
+            color: white;
+        }
+
+        .retroalimentacion {
+            display: none;
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 15px;
+            font-weight: bold;
+        }
+
+        .siguiente {
+            display: none;
+            margin-top: 25px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 15px;
+            background: #f6c945;
+            color: #222;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .siguiente:hover {
+            transform: scale(1.05);
+        }
+
+        .puntuacion {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .paso {
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 15px;
+            background: rgba(255,255,255,0.08);
+        }
+
+        .final {
+            display: none;
+            margin-top: 30px;
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(46,204,113,0.2);
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<header>
+
+    <h1>⚖️ Capítulo 4</h1>
+
+    <p>
+        La Balanza Algebraica
+    </p>
+
+</header>
+
+
+<main class="mision">
+
+    <h2>🏰 Misión: Recuperar el equilibrio</h2>
+
+    <p>
+        ¡Explorador! Has llegado al castillo de las ecuaciones.
+    </p>
+
+    <p>
+        Para avanzar debes mantener la balanza en equilibrio
+        y descubrir el valor de <strong>x</strong>.
+    </p>
+
+
+    <div class="balanza">
+
+        <div class="puntuacion">
+
+            ⭐ Puntos:
+            <span id="puntosJuego">0</span>
+
+        </div>
+
+
+        <div class="ecuacion">
+
+            <div class="lado" id="ladoIzquierdo">
+                2x + 3
+            </div>
+
+            <div class="igual">
+                ⚖️ =
+            </div>
+
+            <div class="lado" id="ladoDerecho">
+                11
+            </div>
+
+        </div>
+
+
+        <div class="pregunta"
+            id="pregunta">
+
+            Cargando desafío...
+
+        </div>
+
+
+        <div class="opciones"
+            id="opciones">
+        </div>
+
+
+        <div class="retroalimentacion"
+            id="retroalimentacion">
+        </div>
+
+
+        <button
+            class="siguiente"
+            id="siguiente"
+            onclick="siguientePregunta()">
+
+            ➡️ Siguiente paso
+
+        </button>
+
+
+        <div
+            class="final"
+            id="final">
+
+            <h2>🏆 ¡MISIÓN COMPLETADA!</h2>
+
+            <p>
+                ¡Has conseguido equilibrar la balanza!
+            </p>
+
+            <div class="paso">
+                <strong>2x + 3 = 11</strong>
+            </div>
+
+            <div class="paso">
+                ➖ Restamos 3 a ambos lados
+                <br>
+                <strong>2x = 8</strong>
+            </div>
+
+            <div class="paso">
+                ➗ Dividimos ambos lados entre 2
+                <br>
+                <strong>x = 4</strong>
+            </div>
+
+            <p>
+                🎯 El valor de la incógnita es:
+                <strong>x = 4</strong>
+            </p>
+
+            <p>
+                🔓 ¡El Capítulo 5 ha sido desbloqueado!
+            </p>
+
+            <button
+                class="siguiente"
+                style="display:inline-block"
+                onclick="volverMapa()">
+
+                🗺️ Volver al mapa
+
+            </button>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script src="../js/progreso.js"></script>
+
+
+<script>
+
+const preguntas = [
+
+    {
+        pregunta:
+            "⚖️ Para mantener el equilibrio, ¿qué debemos hacer con el 3?",
+        opciones: [
+            "Sumar 3 solamente al lado izquierdo",
+            "Restar 3 a ambos lados",
+            "Multiplicar 3 solamente al lado derecho"
+        ],
+        correcta: 1,
+        explicacion:
+            "Debemos hacer la misma operación en ambos lados. Restamos 3 a ambos lados."
+    },
+
+    {
+        pregunta:
+            "Después de restar 3 a ambos lados, ¿qué obtenemos?",
+        opciones: [
+            "2x = 8",
+            "2x = 14",
+            "x + 3 = 11"
+        ],
+        correcta: 0,
+        explicacion:
+            "Al restar 3: 2x + 3 - 3 = 11 - 3, por lo tanto 2x = 8."
+    },
+
+    {
+        pregunta:
+            "⚖️ Tenemos 2x = 8. ¿Qué operación permite encontrar x?",
+        opciones: [
+            "Sumar 2 a ambos lados",
+            "Restar 8 a ambos lados",
+            "Dividir ambos lados entre 2"
+        ],
+        correcta: 2,
+        explicacion:
+            "Como 2 multiplica a x, dividimos ambos lados entre 2."
+    },
+
+    {
+        pregunta:
+            "¿Cuál es el valor de x?",
+        opciones: [
+            "x = 2",
+            "x = 4",
+            "x = 8"
+        ],
+        correcta: 1,
+        explicacion:
+            "8 dividido entre 2 es 4. Por eso x = 4."
+    },
+
+    {
+        pregunta:
+            "🎯 Si x = 4, ¿cuánto vale 2x + 3?",
+        opciones: [
+            "7",
+            "8",
+            "11"
+        ],
+        correcta: 2,
+        explicacion:
+            "2(4) + 3 = 8 + 3 = 11. La respuesta coincide con el otro lado."
+    }
+
+];
+
+
+let preguntaActual = 0;
+
+let puntosJuego = 0;
+
+let respondida = false;
+
+
+const pregunta =
+    document.getElementById("pregunta");
+
+const opciones =
+    document.getElementById("opciones");
+
+const retroalimentacion =
+    document.getElementById("retroalimentacion");
+
+const siguiente =
+    document.getElementById("siguiente");
+
+const puntos =
+    document.getElementById("puntosJuego");
+
+const final =
+    document.getElementById("final");
+
+
+function cargarPregunta() {
+
+    respondida = false;
+
+    retroalimentacion.style.display =
+        "none";
+
+    siguiente.style.display =
+        "none";
+
+    opciones.innerHTML = "";
+
+
+    const actual =
+        preguntas[preguntaActual];
+
+
+    pregunta.textContent =
+        actual.pregunta;
+
+
+    actual.opciones.forEach(
+        (opcion, indice) => {
+
+            const boton =
+                document.createElement("button");
+
+            boton.className =
+                "opcion";
+
+            boton.textContent =
+                opcion;
+
+            boton.onclick = function() {
+
+                comprobarRespuesta(
+                    indice
+                );
+
+            };
+
+            opciones.appendChild(
+                boton
+            );
+
+        }
+    );
+
+}
+
+
+function comprobarRespuesta(indice) {
+
+    if (respondida) return;
+
+    respondida = true;
+
+
+    const actual =
+        preguntas[preguntaActual];
+
+
+    const botones =
+        document.querySelectorAll(
+            ".opcion"
+        );
+
+
+    botones.forEach(
+        boton => {
+            boton.disabled = true;
+        }
+    );
+
+
+    retroalimentacion.style.display =
+        "block";
+
+
+    if (indice === actual.correcta) {
+
+        botones[indice]
+            .classList.add("correcta");
+
+
+        puntosJuego += 20;
+
+
+        puntos.textContent =
+            puntosJuego;
+
+
+        retroalimentacion.innerHTML =
+            "✅ ¡Correcto!<br><br>" +
+            actual.explicacion;
+
+
+        retroalimentacion.style.background =
+            "rgba(46,204,113,0.2)";
+
+
+    } else {
+
+        botones[indice]
+            .classList.add("incorrecta");
+
+
+        botones[actual.correcta]
+            .classList.add("correcta");
+
+
+        retroalimentacion.innerHTML =
+            "❌ Respuesta incorrecta.<br><br>" +
+            actual.explicacion;
+
+
+        retroalimentacion.style.background =
+            "rgba(231,76,60,0.2)";
+
+    }
+
+
+    if (
+        preguntaActual <
+        preguntas.length - 1
+    ) {
+
+        siguiente.style.display =
+            "inline-block";
+
+    } else {
+
+        finalizarCapitulo();
+
+    }
+
+}
+
+
+function siguientePregunta() {
+
+    preguntaActual++;
+
+    cargarPregunta();
+
+}
+
+
+function finalizarCapitulo() {
+
+    if (puntosJuego >= 80) {
+
+        sumarPuntos(puntosJuego);
+
+        completarCapitulo(4);
+
+
+        setTimeout(
+            () => {
+
+                final.style.display =
+                    "block";
+
+            },
+            500
+        );
+
+    } else {
+
+        setTimeout(
+            () => {
+
+                alert(
+                    "⚠️ Necesitas obtener al menos 80 puntos para superar el capítulo.\n\n" +
+                    "Vuelve a intentarlo y consigue 80 puntos o más."
+                );
+
+                location.reload();
+
+            },
+            500
+        );
+
+    }
+
+}
+
+
+function volverMapa() {
+
+    window.location.href =
+        "../index.html";
+
+}
+
+
+cargarPregunta();
+
+</script>
+
+</body>
+
+</html>
